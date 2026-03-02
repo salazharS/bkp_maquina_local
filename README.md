@@ -10,6 +10,8 @@ O Script segue algumas etapas;
 5.  O arquivo é compactado e renomeado com a data atual
 6.  Talvez, o arquivo compactado seja enviado para uma pasta em nuvem 
 
+---
+
 <img width="1749" height="759" alt="tutorial" src="https://github.com/user-attachments/assets/9b524daf-03ca-43b4-b81c-e02a43098699" />
 
  ---
