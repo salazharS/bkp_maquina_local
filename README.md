@@ -1,5 +1,5 @@
 
-## Breve script de Backup utilizando [wbadmin]([http://example.com](https://learn.microsoft.com/pt-br/windows-server/administration/windows-commands/wbadmin)) 
+## Breve script de Backup utilizando wbadmin 
 
 O Script segue algumas etapas; 
 
