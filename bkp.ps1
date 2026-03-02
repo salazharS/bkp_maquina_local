@@ -1,7 +1,7 @@
 $recovery = "R:"
 $date = Get-Date -Format "yyyy-MM-dd_HH-mm"
 $local_zip = "R:\WindowsImageBackup_$date.zip"
-$cloud_folder = "C:\Users\felip\iCloudDrive\Backup\Frigobar"
+#$cloud_folder = "C:\Users\felip\iCloudDrive\Backup\Frigobar"
 
 # ===== VERIFICA SAÚDE DO HD =====
 $disk = Get-PhysicalDisk | Where-Object FriendlyName -eq "SAMSUNG HD502HI"
