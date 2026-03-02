@@ -11,3 +11,7 @@ O Script segue algumas etapas;
 6.  Talvez, o arquivo compactado seja enviado para uma pasta em nuvem 
 
 <img width="1749" height="759" alt="tutorial" src="https://github.com/user-attachments/assets/9b524daf-03ca-43b4-b81c-e02a43098699" />
+
+ ---
+
+ Algumas condicoes chatas acontecem, como muito espaco no disco necessario e permissao de admin para execucao. 
