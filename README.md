@@ -11,6 +11,9 @@ O Script segue algumas etapas;
 6.  Talvez, o arquivo compactado seja enviado para uma pasta em nuvem 
 ---
 
+Recomendo que nao tenha arquivos desnecessarios no disco C:, e que tenha um volume dedicado apenas para armazenar o arquivo do wbadmin
+
+---
 Para utilizacao em outros ambientes, é necessario alterar as variaveis com a letra da unidade de recovery (onde fica o backup), alterar a letra da unidade que será feito o Backup e alterar o nome do disco de armazenamento em que o backup é salvo
 
 ```powershell
