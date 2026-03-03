@@ -7,8 +7,9 @@ O Script segue algumas etapas;
 2. Caso exista uma pasta **WindowsImageBackup** que sobrou de um Backup antigo, ela é renomeada com _OLD
 3.  Backup é iniciado
 4.  Se for bem sucedido, a pasta _OLD é removida
-5.  O arquivo é compactado e renomeado com a data atual e salvo na unidade de backup
-6.  Talvez, o arquivo compactado seja enviado para uma pasta em nuvem 
+5.  O arquivo é  duplicado compactado e renomeado com a data atual e salvo na unidade de backup
+6.  Talvez, o arquivo compactado seja enviado para uma pasta em nuvem
+7.  A ultima pasta **WindowsImageBackup** se mantem disponivel para restauracao imediata
 ---
 
 Recomendo que nao tenha arquivos desnecessarios no disco C:, e que tenha um volume dedicado apenas para armazenar o arquivo do wbadmin
