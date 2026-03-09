@@ -2,6 +2,9 @@ $recovery = "R:"
 $bkp_disk = "C:"
 $hd_name = "SAMSUNG HD502HI"
 
+$run_cleanup = $true
+$run_dism = $true
+
 $date = Get-Date -Format "yyyy-MM-dd_HH-mm"
 $local_zip = "$recovery\WindowsImageBackup_$date.zip"
 $bkp_atual = "$recovery\WindowsImageBackup"
@@ -16,6 +19,18 @@ if ($null -eq $disk) {
 elseif ($disk.HealthStatus -eq "Healthy") {
 
     Write-Host "HD saudável. Iniciando processo..."
+
+    # ===== CLEANUP DO DISCO =====
+    if ($run_dism) {
+        Write-Host "Executando DISM Component Cleanup..."
+            DISM /Online /Cleanup-Image /StartComponentCleanup
+    } 
+
+    # ===== LIMPESA C DISM =====
+    if ($run_cleanup) {
+        Write-Host "Executando Disk Cleanup..."
+            cleanmgr /sagerun:1
+    } 
 
     # ===== SE EXISTIR BACKUP ATUAL, RENOMEIA PARA _OLD =====
     if (Test-Path $bkp_atual) {
