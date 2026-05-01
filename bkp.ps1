@@ -1,3 +1,11 @@
+# Auto-elevação para administrador
+if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
+).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+
+    Start-Process pwsh -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
 $recovery = "R:"
 $bkp_disk = "C:"
 $hd_name = "SAMSUNG HD502HI"
@@ -10,7 +18,7 @@ $local_zip = "$recovery\WindowsImageBackup_$date.zip"
 $bkp_atual = "$recovery\WindowsImageBackup"
 $old_bkp     = "$recovery\WindowsImageBackup_OLD"
 
-# ===== VERIFICA SAÚDE DO HD =====
+#VERIFICA SAÚDE DO HD
 $disk = Get-PhysicalDisk | Where-Object FriendlyName -eq $hd_name
 
 if ($null -eq $disk) {
@@ -20,19 +28,19 @@ elseif ($disk.HealthStatus -eq "Healthy") {
 
     Write-Host "HD saudável. Iniciando processo..."
 
-    # ===== CLEANUP DO DISCO =====
+    #CLEANUP DO DISCO
     if ($run_dism) {
         Write-Host "Executando DISM Component Cleanup..."
             DISM /Online /Cleanup-Image /StartComponentCleanup
     } 
 
-    # ===== LIMPESA C DISM =====
+    #LIMPESA C DISM
     if ($run_cleanup) {
         Write-Host "Executando Disk Cleanup..."
             cleanmgr /sagerun:1
     } 
 
-    # ===== SE EXISTIR BACKUP ATUAL, RENOMEIA PARA _OLD =====
+    #SE EXISTIR BACKUP ATUAL, RENOMEIA PARA _OLD
     if (Test-Path $bkp_atual) {
 
         # Se já existir um OLD antigo, remove
@@ -44,20 +52,20 @@ elseif ($disk.HealthStatus -eq "Healthy") {
         Write-Host "Backup anterior renomeado para _OLD."
     }
 
-    # ===== EXECUTA BACKUP =====
+    #EXECUTA BACKUP
     wbadmin start backup -backupTarget:$recovery -include:$bkp_disk -allCritical -quiet
 
     if ($LASTEXITCODE -eq 0) {
 
         Write-Host "Backup concluído com sucesso."
 
-        # ===== REMOVE O OLD =====
+        #REMOVE O OLD
         if (Test-Path $old_bkp) {
             Remove-Item $old_bkp -Recurse -Force
             Write-Host "Backup antigo removido."
         }
 
-        # ===== COMPACTA O NOVO =====
+        #COMPACTA O NOVO
         Write-Host "Compactando novo backup..."
         tar -a -c -f $local_zip -C "$recovery\" "WindowsImageBackup"
 
@@ -66,7 +74,7 @@ elseif ($disk.HealthStatus -eq "Healthy") {
     else {
         Write-Host "Erro no wbadmin!"
 
-        # ===== RESTAURA O OLD SE DER ERRO =====
+        #RESTAURA O OLD SE DER ERRO
         if (Test-Path $old_bkp) {
             Rename-Item $old_bkp $bkp_atual
             Write-Host "Backup anterior restaurado."
